@@ -8,9 +8,12 @@ Return: The total number of permutations of length n, followed by a list of all 
 
 Sample Dataset
 ===
+```
 3
+```
 Sample Output
 ===
+```
 6
 1 2 3
 1 3 2
@@ -18,3 +21,4 @@ Sample Output
 2 3 1
 3 1 2
 3 2 1
+```
