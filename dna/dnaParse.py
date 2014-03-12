@@ -3,10 +3,10 @@
 import sys
 def main(argv):
 	strand = str(argv[0])
-	aCount = 0;
-	cCount = 0;
-	gCount = 0;
-	tCount = 0;
+	aCount = 0
+	cCount = 0
+	gCount = 0
+	tCount = 0
 
 	#Parsing DNA strand
 	for molecule in strand:
