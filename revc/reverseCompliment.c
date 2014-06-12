@@ -20,7 +20,7 @@ void translate(char *str)
 
 void reverse(char *str)
 {
-	char* first = &str[ 0 ];
+	char* first = str;
 	char* last = &str[ strlen( str ) - 1 ];
 	while( first < last) {
 		char temp = *first;
@@ -33,8 +33,11 @@ void reverse(char *str)
 
 int main(int argc, char *argv[])
 {
-	char str[] = "AAAACCCGGT";
-	translate(str);
-	reverse(str);
-	printf("%s\n", str);
+	if(argc == 2){
+	translate(argv[1]);
+	reverse(argv[1]);
+	printf("%s\n", argv[1]);
+	}else{
+		printf("Wrong number of arguments");
+	}
 }
