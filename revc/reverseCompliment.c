@@ -18,9 +18,23 @@ void translate(char *str)
 	}
 }
 
+void reverse(char *str)
+{
+	char* first = &str[ 0 ];
+	char* last = &str[ strlen( str ) - 1 ];
+	while( first < last) {
+		char temp = *first;
+		*first = *last;
+		*last = temp;
+		++first;
+		--last;
+	}
+}
+
 int main(int argc, char *argv[])
 {
-	char *str = "AAACCCGGT";
+	char str[] = "AAAACCCGGT";
 	translate(str);
+	reverse(str);
 	printf("%s\n", str);
 }
