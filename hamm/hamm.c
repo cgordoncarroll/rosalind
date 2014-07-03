@@ -18,5 +18,12 @@ int main(int argc, char *argv[])
 
 int compare_strands(char strand1[MAX_SIZE], char strand2[MAX_SIZE])
 {
-    return 1;
+    int distance = 0;
+    for(int i = 0; i < strlen(strand1); i++)
+    {
+        if(strand1[i] != strand2[i]){
+            distance++;
+        }
+    }
+    return distance;
 }
