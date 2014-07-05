@@ -18,8 +18,8 @@ int main(){
     int k = 0;
     while(getline(&line, &len, fp))
     {
-        rna_codons[k].key = * strtok(line, " ");
-        rna_codons[k].value = * strtok(line, " ");
+        rna_codons[k].key = line[0] + line[1] + line[2];
+        rna_codons[k].value = line[4]; 
         k++;
     }
     fclose(fp);
