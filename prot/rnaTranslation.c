@@ -18,13 +18,22 @@ int main(){
     int k = 0;
     while(getline(&line, &len, fp))
     {
-        rna_codons[k].key = line[0] + line[1] + line[2];
-        rna_codons[k].value = line[4]; 
-        k++;
+        char line_array[6];
+        strcpy(line_array, line);
+        printf("%s", line_array[3]);
+        /*char key[3];
+        strcat(key, line_array[0]);
+        strcat(key, line_array[1]);
+        strcat(key, line_array[2]);
+        printf("%s", line_array[4]);
+        rna_codons[k].key = key;
+        rna_codons[k].value = line_array[4]; 
+        k++;*/
     }
     fclose(fp);
-
-    for(int i = 0; i < 64; i++){
+    
+    int i;
+    for(i = 0; i < 64; i++){
         printf("Key: %c Value: %c\n", rna_codons[i].key, rna_codons[i].value);
     }
 }
