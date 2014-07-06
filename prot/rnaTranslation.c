@@ -2,9 +2,13 @@
 #include <string.h>
 
 struct dict{
-    char key;
-    char value;
+    char key[4];
+    char value[2];
 };
+
+char lookup_codon(struct dict dictionary, char searchTerm){
+
+}
 
 int main(){
     struct dict rna_codons[64];
@@ -16,24 +20,28 @@ int main(){
     char * line = NULL;
     size_t len = 0;
     int k = 0;
-    while(getline(&line, &len, fp))
+
+    while(getline(&line, &len, fp) != -1)
     {
         char line_array[6];
         strcpy(line_array, line);
-        printf("%s", line_array[3]);
-        /*char key[3];
-        strcat(key, line_array[0]);
-        strcat(key, line_array[1]);
-        strcat(key, line_array[2]);
-        printf("%s", line_array[4]);
-        rna_codons[k].key = key;
-        rna_codons[k].value = line_array[4]; 
-        k++;*/
+        
+        char value[2];
+        memcpy(value, &line_array[4], 1);
+        value[1] = '\0';
+        strcpy(rna_codons[k].value, value); 
+
+        char key[4];
+        memcpy( key, &line_array[0], 3);
+        key[3] = '\0';
+        strcpy(rna_codons[k].key, key);
+        k++;
     }
+    free(line);
     fclose(fp);
-    
+    // Make sure we read everything in right
     int i;
     for(i = 0; i < 64; i++){
-        printf("Key: %c Value: %c\n", rna_codons[i].key, rna_codons[i].value);
+        printf("Key: %s Value: %s\n", rna_codons[i].key, rna_codons[i].value);
     }
 }
