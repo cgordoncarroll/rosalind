@@ -1,13 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 
+#define NELEMS(x) (sizeof(x) / sizeof(x[0]))
+
 struct dict{
     char key[4];
     char value[2];
 };
 
-char lookup_codon(struct dict dictionary, char searchTerm){
-
+void lookup_codon(struct dict dictionary[], char *searchTerm, char *result){
+    for(int i = 0; i < NELEMS(dictionary); i++)
+    {
+        if(dictionary[i].key == searchTerm)
+        {
+            strcpy(result, dictionary[i].value);
+        }
+    }
 }
 
 int main(){
@@ -25,7 +33,7 @@ int main(){
     {
         char line_array[6];
         strcpy(line_array, line);
-        
+
         char value[2];
         memcpy(value, &line_array[4], 1);
         value[1] = '\0';
@@ -44,4 +52,5 @@ int main(){
     for(i = 0; i < 64; i++){
         printf("Key: %s Value: %s\n", rna_codons[i].key, rna_codons[i].value);
     }
+    printf("%d lines read in for codon table. Input DNA Strand:", k+1);
 }
