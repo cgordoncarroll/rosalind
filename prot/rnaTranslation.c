@@ -1,25 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#define NELEMS(x) (sizeof(x) / sizeof(x[0]))
+#define MAX_SIZE 10000
+#define CODON_DICT_SIZE 64
 
 struct dict{
     char key[4];
     char value[2];
 };
 
-void lookup_codon(struct dict dictionary[], char *searchTerm, char *result){
-    for(int i = 0; i < NELEMS(dictionary); i++)
+char lookup_codon(struct dict dictionary[CODON_DICT_SIZE], char * search_term)
+{
+    int i;
+    char result;
+    for(i = 0; i < CODON_DICT_SIZE; i++)
     {
-        if(dictionary[i].key == searchTerm)
+        if(strcmp(dictionary[i].key, search_term)==0)
         {
-            strcpy(result, dictionary[i].value);
+            result = *dictionary[i].value;
+            break;
         }
     }
+    return result;
 }
 
 int main(){
-    struct dict rna_codons[64];
+    struct dict rna_codons[CODON_DICT_SIZE];
 
     FILE * fp;
 
@@ -47,10 +54,31 @@ int main(){
     }
     free(line);
     fclose(fp);
+
     // Make sure we read everything in right
     int i;
-    for(i = 0; i < 64; i++){
+    for(i = 0; i < CODON_DICT_SIZE; i++){
         printf("Key: %s Value: %s\n", rna_codons[i].key, rna_codons[i].value);
     }
-    printf("%d lines read in for codon table. Input DNA Strand:", k+1);
+    printf("%d lines read in for codon table.\nInput DNA Strand: ", k+1);
+
+    char strand [MAX_SIZE];
+    fgets(strand, MAX_SIZE-1, stdin);
+    printf("Parsing DNA Strand: %s", strand);
+    int n;
+    for(n = 0; n < strlen(strand)-3; n=n+3)
+    {
+        char search_term[4];
+        memcpy(search_term, &strand[n], 3);
+        search_term[3] = '\0';
+        char result;
+        result = lookup_codon(rna_codons, search_term);
+        char stop_codon = "Z\0";
+        if(strcmp(&result, &stop_codon) == 0){
+            printf("STOP CODON FOUND !!!\n");
+        }
+        printf("%c", result);
+    }
+    printf("\n");
+    return 0;
 }
