@@ -73,11 +73,12 @@ int main(){
         search_term[3] = '\0';
         char result;
         result = lookup_codon(rna_codons, search_term);
-        char stop_codon = "Z\0";
+        char stop_codon = 'Z';
+        printf("RESULT: |%c| STOP CODON: |%c| \n", result, stop_codon);
         if(strcmp(&result, &stop_codon) == 0){
             printf("STOP CODON FOUND !!!\n");
         }
-        printf("%c", result);
+        //printf("%c", result);
     }
     printf("\n");
     return 0;
