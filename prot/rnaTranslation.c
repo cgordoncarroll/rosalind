@@ -56,15 +56,11 @@ int main(){
     fclose(fp);
 
     // Make sure we read everything in right
-    int i;
-    for(i = 0; i < CODON_DICT_SIZE; i++){
-        printf("Key: %s Value: %s\n", rna_codons[i].key, rna_codons[i].value);
-    }
     printf("%d lines read in for codon table.\nInput DNA Strand: ", k+1);
 
     char strand [MAX_SIZE];
     fgets(strand, MAX_SIZE-1, stdin);
-    printf("Parsing DNA Strand: %s", strand);
+    //Parsing DNA Strand
     int n;
     for(n = 0; n < strlen(strand)-3; n=n+3)
     {
@@ -74,11 +70,11 @@ int main(){
         char result;
         result = lookup_codon(rna_codons, search_term);
         char stop_codon = 'Z';
-        printf("RESULT: |%c| STOP CODON: |%c| \n", result, stop_codon);
-        if(strcmp(&result, &stop_codon) == 0){
-            printf("STOP CODON FOUND !!!\n");
+        if(result == stop_codon){
+            break;
+        }else{
+            printf("%c", result);
         }
-        //printf("%c", result);
     }
     printf("\n");
     return 0;
